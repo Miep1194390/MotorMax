@@ -7,11 +7,9 @@ import Register from './components/Register.jsx'
 function App() {
   return (
     <div>
-      <Header />
-      <Login />
-      <Register />
-
-
+      <Header></Header>
+      {/* <Login></Login>
+      <Register></Register> */}
     </div>
   )
 }
