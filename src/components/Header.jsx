@@ -7,10 +7,10 @@ const Header = () => {
     return (
         <header className="header">
             <div className="header_logo">
-                <img src={logo} alt="MotoMax Logo" />
+                <Link to="/"><img src={logo} alt="MotoMax Logo" /></Link>
             </div>
             <div className="header_login">
-                <a href="">Over ons</a>
+                <Link to="/hoewerkthet">Hoe werkt het?</Link>
                 <a href="">Account</a>
                 <a href="">Login</a>
             </div>
