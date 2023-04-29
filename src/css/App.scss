@@ -8,13 +8,44 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'BlenderPro';
+    scroll-behavior: smooth;
+}
+
+// Custom scrollbar
+html {
+    /* width */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f5f5f5; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #ff6600;
+        transition: .25s; 
+        border-radius: 10px;
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #ff6600;
+        transition: .25s; 
+    }
 }
 
 body {
     font-family: 'Roboto', sans-serif;
     background-image: url(../img/background3.jpg);
     background-size: cover;
+    object-fit: cover;
     background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
 }
 
 .header {
@@ -40,4 +71,58 @@ body {
         transition: .25s;
     }
   }
+
+.hero-container {
+    margin-top: 130px;
+    margin-left: 3rem;
+    .hero-container_item {
+        h1 {
+            color: #f5f5f5;
+            font-size: 4rem;
+        }
+        p {
+            color: #ff6600;
+            font-size: 2rem;
+        }
+        a {
+            width: 210px;
+            text-decoration: none;
+            margin-top: 20px;
+            color: #f5f5f5;
+            background-color: #ff6600;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 20px;
+            font-size: 20px;
+            font-weight: 500;
+            line-height: 22px;
+            display: flex;
+            align-items: center;
+            transition: .25s;
+        }
+
+        a:hover {
+            cursor: pointer;
+            background-color: #f5f5f5;
+            color: #ff6600;
+            transition: .25s;
+        }
+        a svg {
+            padding-right: 10px;
+            width: 30px;
+            height: 30px;
+        }
+    }
+}
+
+.feed-container {
+    margin-top: 216px;
+    width: 100%;
+    height: 100vh;
+    .feed-container_item {
+        h1 {
+            color: #f5f5f5;
+        }
+    }
+}
   

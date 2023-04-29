@@ -1,15 +1,15 @@
 import React from 'react'
 import Header from './components/Header.jsx'
-import Login from './components/Login.jsx'
-import Register from './components/Register.jsx'
+import Feed from './components/Feed.jsx'
+import Hero from './components/Hero.jsx'
 
 
 function App() {
   return (
     <div>
       <Header></Header>
-      {/* <Login></Login>
-      <Register></Register> */}
+      <Hero></Hero>
+      <Feed></Feed>
     </div>
   )
 }
