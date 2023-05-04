@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { db } from "../firebase.js";
-import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 const Feed = () => {
 
@@ -25,11 +25,11 @@ const Feed = () => {
                 <p className="m-0">Hieronder vind je alle meetings die ingepland staan</p>
                 <p className="m-0">klik op de meeting voor meer informatie.</p>
             </div>
-            <div className="row pt-5">
+            <div className="row d-flex justify-content-center pt-5">
                     
                 {meetings.map((meeting) => {
                         return (
-                            <div className="feed-container_item col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 text-center">
+                            <div className="feed-container_item mx-3 my-3 col-12 col-xxl-3 col-xl-3 col-lg-3  text-center">
                                 <h1>Titel: {meeting.title}</h1>
                                 <p>Beschrijving: {meeting.description}</p>
                                 <p>Locatie: {meeting.location}</p>

@@ -3,6 +3,9 @@ import Header from "./Header";
 import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../firebase.js";
+import "../css/App.scss";
+
+
 
 const Admin = () => {
 
