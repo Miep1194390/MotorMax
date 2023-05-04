@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import firebase from "../firebase";
+import Header from "./Header.jsx";
 
 
 const Login = () => {
@@ -20,6 +21,8 @@ const Login = () => {
   }
 
   return (
+    <div>
+      <Header></Header>
     <form onSubmit={handleLogin}>
       <label>Email:</label>
       <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
@@ -28,7 +31,8 @@ const Login = () => {
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
       <button type="submit">Log in</button>
-    </form>
+      </form>
+      </div>
   );
 }
 

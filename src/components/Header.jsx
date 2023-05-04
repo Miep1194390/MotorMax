@@ -11,8 +11,8 @@ const Header = () => {
             </div>
             <div className="header_login">
                 <Link to="/hoewerkthet">Hoe werkt het?</Link>
-                <a href="">Account</a>
-                <a href="">Login</a>
+                <Link to="/admin">Admin</Link>
+                <Link to="/login">Login</Link>
             </div>
         </header>
     );  
