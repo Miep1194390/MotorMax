@@ -4,8 +4,7 @@ import { collection, getDocs, addDoc, deleteDoc, doc } from "firebase/firestore"
 import { useState, useEffect } from "react";
 import { db } from "../firebase.js";
 import "../css/App.scss";
-
-
+import { onSnapshot } from "firebase/firestore";
 
 const Admin = () => {
 
@@ -28,6 +27,18 @@ const Admin = () => {
         getMeetings();
 
     }, []);
+
+    useEffect(() => {
+
+        const unsubscribe = onSnapshot(meetingsCollectionRef, (snapshot) => {
+            setMeetings(snapshot.docs.map(doc => ({id: doc.id, data: doc.data()})))
+        });
+
+        return () => {
+            unsubscribe();
+        }
+            
+    }, [])
 
     const createMeeting = async () => {
         await addDoc(meetingsCollectionRef, { title: NewTitle, description: NewDescription, location: NewLocation, start_date: NewStart_date, end_date: NewEnd_date, time: Newtime })
@@ -52,14 +63,17 @@ const Admin = () => {
             <div className="admin-meetings">
                 {meetings.map((meeting) => {
                     return (
-                        <div className="feed-container_item col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 text-center">
-                            <h1>Titel: {meeting.title}</h1>
-                            <p>Beschrijving: {meeting.description}</p>
-                            <p>Locatie: {meeting.location}</p>
-                            <p>Start datum: {meeting.start_date}</p>
-                            <p>Eind datum: {meeting.end_date}</p>
-                            <p>Tijdstip: {meeting.time}</p>
-                            <button onClick={() => { deleteMeeting(meeting.id) }}>Verwijder meeting</button>
+                        <div key={  meeting.id } className="feed-container_item col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 text-center">
+                            <ul className="d-flex">
+                                <li>Titel: {meeting.title}</li>
+                                <li>Beschrijving: {meeting.description}</li>
+                                <li>Locatie: {meeting.location}</li>
+                                <li>Start datum: {meeting.start_date}</li>
+                                <li>Eind datum: {meeting.end_date}</li>
+                                <li>Tijdstip: {meeting.time}</li>
+                                <button onClick={() => { deleteMeeting(meeting.id) }}>Verwijder meeting</button>
+                            </ul>
+                            
                         </div>
                     )
                 })}

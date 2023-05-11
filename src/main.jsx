@@ -9,12 +9,12 @@ import Admin from './components/Admin.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-    <Routes>
+      <Routes>
           <Route path="/" element={<App />} />
-        <Route path="/hoewerkthet" element={<Hoewerkthet />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/login" element={<Login />} />
-    </Routes>
+          <Route path="/hoewerkthet" element={<Hoewerkthet />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>,
 )
