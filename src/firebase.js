@@ -2,7 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from '@firebase/firestore';
+import { getFirestore } from "@firebase/firestore";
+import firebase from "firebase/compat/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -15,7 +16,7 @@ const firebaseConfig = {
   storageBucket: "motormax-nl.appspot.com",
   messagingSenderId: "342868942421",
   appId: "1:342868942421:web:67c73bd5c663558c6c3edc",
-  measurementId: "G-9NHS9T9R9E"
+  measurementId: "G-9NHS9T9R9E",
 };
 
 // Initialize Firebase
