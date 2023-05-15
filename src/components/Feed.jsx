@@ -29,17 +29,18 @@ const Feed = () => {
             <div className="row d-flex justify-content-center pt-5">
                     
                 {meetings.map((meeting) => {
-                        return (
-                            <div key={ meeting.id } className="feed-container_item mx-3 my-3 col-12 col-xxl-3 col-xl-3 col-lg-3  text-center">
-                                <h1>Titel: {meeting.title}</h1>
-                                <p>Beschrijving: {meeting.description}</p>
-                                <p>Locatie: {meeting.location}</p>
-                                <p>Start datum: {meeting.start_date}</p>
-                                <p>Eind datum: {meeting.end_date}</p>
-                                <p>Tijdstip: {meeting.time}</p>
-                            </div>
-                        )
-                    })}
+                    return (
+                        <div key={meeting.id} className="feed-container_item mx-3 my-3 col-12 col-xxl-3 col-xl-3 col-lg-3  text-center">
+                            <h1>Titel: {meeting.title}</h1>
+                            <p>Beschrijving: {meeting.description}</p>
+                            <p>Locatie: {meeting.location}</p>
+                            <p>Start datum: {meeting.start_date}</p>
+                            <p>Eind datum: {meeting.end_date}</p>
+                            <p>Tijdstip: {meeting.time}</p>
+                        </div>
+                    )
+                })}
+                
             </div>
         </div>
     );

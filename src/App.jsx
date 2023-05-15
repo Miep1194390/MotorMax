@@ -12,7 +12,6 @@ const App = () =>  {
     <div>
       <Header></Header>
       <Hero></Hero>
-      <Feed></Feed>
     </div>
   )
 }
