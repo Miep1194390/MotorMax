@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react";
 import { auth, provider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 import Header from "./Header";
-import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import firebase from "firebase/compat/app";
+
 
 
 const Login = () => {
   const [value, setValue] = useState("");
 
-  const handleClick = () => {
-    signInWithPopup(auth, provider).then((data) => {
+  const handleClick = async () => {
+    await signInWithPopup(auth, provider).then((data) => {
       setValue(data.user.email);
       localStorage.setItem("email", data.user.email);
     });
   };
-
 
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const Login = () => {
               </a>
               <a href="#">
                 <button className="buttonnostyle" onClick={handleClick}>
-                  Doorgaan met Microsoft
+                    Doorgaan met Microsoft
                 </button>
               </a>
             </div>
