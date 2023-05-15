@@ -2,24 +2,27 @@ import React, { useEffect, useState } from "react";
 import { auth, provider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 import Header from "./Header";
-import "firebase/compat/auth";
 import firebase from "firebase/compat/app";
-
-
+import "firebase/compat/auth";
 
 const Login = () => {
-  const [value, setValue] = useState("");
+  const [username, setUsername] = useState("");
 
-  const handleClick = async () => {
-    await signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user.email);
-      localStorage.setItem("email", data.user.email);
-    });
+  const handleClick = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log("Gebruikersinformatie:", user);
+        setUsername(user.displayName);
+        localStorage.setItem("email", user.email);
+      })
+      .catch((error) => {
+        console.error("Fout bij aanmelden:", error);
+      });
   };
 
-
   useEffect(() => {
-    setValue(localStorage.getItem("email"));
+    setUsername(localStorage.getItem("email"));
   }, []);
 
   return (
@@ -27,7 +30,7 @@ const Login = () => {
       <Header />
       <div className="login-outercontainer">
         <div className="login-innercontainer">
-          <h1 className="login-h1">{value}</h1>
+          <h1 className="login-h1">{username}</h1>
           <div className="login-container">
             <div className="login-container_item">
               <a href="#">
@@ -47,7 +50,7 @@ const Login = () => {
               </a>
               <a href="#">
                 <button className="buttonnostyle" onClick={handleClick}>
-                    Doorgaan met Microsoft
+                  Doorgaan met Microsoft
                 </button>
               </a>
             </div>
@@ -56,6 +59,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;
