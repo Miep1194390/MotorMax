@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { auth, provider } from "../firebase";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import Header from "./Header";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -21,6 +21,17 @@ const Login = () => {
       });
   };
 
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        setUsername("");
+        localStorage.removeItem("email");
+      })
+      .catch((error) => {
+        console.error("Fout bij uitloggen:", error);
+      });
+  };
+
   useEffect(() => {
     setUsername(localStorage.getItem("email"));
   }, []);
@@ -38,20 +49,10 @@ const Login = () => {
                   Doorgaan met Google
                 </button>
               </a>
-              <a href="#">
-                <button className="buttonnostyle" onClick={handleClick}>
-                  Doorgaan met Microsoft
-                </button>
-              </a>
-              <a href="#">
-                <button className="buttonnostyle" onClick={handleClick}>
-                  Doorgaan met Microsoft
-                </button>
-              </a>
-              <a href="#">
-                <button className="buttonnostyle" onClick={handleClick}>
-                  Doorgaan met Microsoft
-                </button>
+              <a href="">
+              <button className="buttonnostyle" onClick={handleLogout}>
+                Uitloggen
+              </button>
               </a>
             </div>
           </div>
