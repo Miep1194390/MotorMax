@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { db } from "../firebase.js";
 import { collection, getDocs } from "firebase/firestore";
-
+import Sidebar from "./Sidebar.jsx";
 
 const Feed = () => {
 
@@ -19,19 +19,28 @@ const Feed = () => {
 
     }, []);
 
+    const handleLogout = () => {
+        signOut(auth)
+          .then(() => {
+            setUsername("");
+            localStorage.removeItem("email");
+          })
+          .catch((error) => {
+            console.error("Fout bij uitloggen:", error);
+          });
+      };
+
     return (
-        <div id="feed" className="feed-container container-fluid">
-            <div className="feed-intro d-flex align-items-center flex-column">
-                <h2 className="pt-5">Alle huidige meetings</h2>
-                <p className="m-0">Hieronder vind je alle meetings die ingepland staan</p>
-                <p className="m-0">klik op de meeting voor meer informatie.</p>
-            </div>
-            <div className="row d-flex justify-content-center pt-5">
-                    
+        <div className="d-flex">
+            <Sidebar></Sidebar>
+        <div id="feed" className="feed-container container-fluid p-0">
+
+                <div className="row d-flex justify-content-center pt-5">
+                    <h1 className="text-center">Feed</h1>
                 {meetings.map((meeting) => {
                     return (
-                        <div key={meeting.id} className="feed-container_item mx-3 my-3 col-12 col-xxl-3 col-xl-3 col-lg-3  text-center">
-                            <h1>Titel: {meeting.title}</h1>
+                        <div key={meeting.id} className="feed-container_item mx-3 my-3 col-6">
+                            <h2>Titel: {meeting.title}</h2>
                             <p>Beschrijving: {meeting.description}</p>
                             <p>Locatie: {meeting.location}</p>
                             <p>Start datum: {meeting.start_date}</p>
@@ -40,7 +49,7 @@ const Feed = () => {
                         </div>
                     )
                 })}
-                
+                </div>
             </div>
         </div>
     );
