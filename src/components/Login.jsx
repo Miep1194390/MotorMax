@@ -38,23 +38,26 @@ const Login = () => {
   }, []);
 
   return (
-    <div>
-      <div className="login-outercontainer">
-        <div className="login-innercontainer">
-          <h1 className="login-h1">{username}</h1>
-          <div className="login-container">
-            <div className="login-container_item">
-              <div>
-                <button className="buttonnostyle" onClick={handleClick}>
-                  Doorgaan met Google
-                </button>
-              </div>
-              <div>
-              <button className="buttonnostyle" onClick={handleLogout}>
-                Uitloggen
-              </button>
-              </div>
-            </div>
+    <div className="d-flex align-items-center vh vw">
+      <div className="container-fluid" >
+        <div className="row">
+          <div className="content-right col-6 d-flex justify-content-center">
+            <img src="../src\img\logo1.png" alt="" />
+          </div>
+          <div className="content-left col-6 d-flex justify-content-center flex-column">
+            <h1 className="text-center">MotorMax</h1>
+            <br />
+            <button className="" onClick={handleClick}><p>Inloggen met Google</p></button>
+            <br />
+            <button className="" onClick={handleClick}><p>Inloggen met Microsoft</p></button>
+            <br />
+            <hr />
+            <p className="p-0 m-0">Geen account?</p><br />
+            <button className="" onClick={handleClick}><p>Registreren met google</p></button>
+            <br />
+            <button className="" onClick={handleClick}><p>Registreren met Microsoft</p></button>
+            <br />
+            <p className="p-0 m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci praesentium laborum enim reiciendis recusandae laboriosam suscipit molestias! Earum nobis, quo blanditiis magnam est magni explicabo quam tempora deleniti, natus illo?</p>
           </div>
         </div>
       </div>

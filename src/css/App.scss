@@ -167,74 +167,6 @@ body {
   }
 }
 
-// Login section
-.login-outercontainer {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-innercontainer {
-  width: 25vw;
-  height: 70vh;
-  background-color: black;
-  border-radius: 1%;
-  padding: 5%;
-
-  h1 {
-    color: rgb(22, 24, 35);
-    font-weight: 200;
-    font-size: 1rem;
-    padding-bottom: 20%;
-    text-align: center;
-  }
-
-  .login-container {
-    display: flex;
-    justify-content: center;
-
-    .login-container_item {
-      p {
-        color: #ff6600;
-        font-size: 2rem;
-      }
-
-      div {
-        color: rgb(22, 24, 35);
-        border: 1px solid rgba(22, 24, 35, 0.12);
-        font-size: 15px;
-        border-radius: 0px;
-        padding: 0px 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 44px;
-        position: relative;
-        cursor: pointer;
-        margin-bottom: 16px;
-        word-break: keep-all;
-        white-space: nowrap;
-        background: rgb(255, 255, 255);
-        text-decoration: none;
-        font-weight: 600;
-      }
-
-      div:hover {
-        cursor: pointer;
-        background-color: #f5f5f5;
-        color: #ff6600;
-        transition: 0.25s;
-      }
-    }
-  }
-}
-
-.buttonnostyle {
-  all: unset;
-}
-
 .sidebar {
   position: fixed;
   width: 20%;
@@ -244,10 +176,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 20px;
   .content {
     display: flex;
     align-items: end;
-    padding: 20px;
   }
   .sidebar-username {
     font-size: 1.2rem;
@@ -258,7 +190,7 @@ body {
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #3897f0;
+    background-color: #ff6600;
     color: #fff;
     font-size: 1rem;
     font-weight: bold;
@@ -267,13 +199,19 @@ body {
     cursor: pointer;
   }
   .sidebar-links {
-    margin-left: 2rem;
+    margin-left: .5rem;
+    margin-bottom: 8rem;
   }
   .sidebar-link {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     display: flex;
+    transition: .25s;
+    p:hover {
+      fill: #ff6600;  
+      transition: .25s;
+    }
     svg {
-      margin-right: 2rem;
+      margin-right: 1rem;
       width: 25px;
       height: 25px;
     }
@@ -284,7 +222,23 @@ body {
       font-family: "BlenderPro";
     }  
   }
+  .sidebar-link:hover svg {
+    fill: #ff6600;
+    transition: .25s;
+  }
+  .sidebar-link:hover p {
+    color: #ff6600;
+    transition: .25s;
+  }
   
+}
+
+.vh {
+  height: 100vh;
+}
+
+.vw {
+  width: 100vw;
 }
 
 
