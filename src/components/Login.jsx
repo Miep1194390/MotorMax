@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { auth, provider } from "../firebase";
 import { signInWithPopup, signOut } from "firebase/auth";
-import Header from "./Header";
-import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
+  const navigateTo = useNavigate();
 
   const handleClick = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
         console.log("Gebruikersinformatie:", user);
-        setUsername(user.displayName);
+        localStorage.setItem("username", user.displayName);
         localStorage.setItem("email", user.email);
+        navigateTo("/feed");
       })
       .catch((error) => {
         console.error("Fout bij aanmelden:", error);
@@ -37,24 +38,26 @@ const Login = () => {
   }, []);
 
   return (
-    <div>
-      <Header />
-      <div className="login-outercontainer">
-        <div className="login-innercontainer">
-          <h1 className="login-h1">{username}</h1>
-          <div className="login-container">
-            <div className="login-container_item">
-              <a href="#">
-                <button className="buttonnostyle" onClick={handleClick}>
-                  Doorgaan met Google
-                </button>
-              </a>
-              <a href="">
-              <button className="buttonnostyle" onClick={handleLogout}>
-                Uitloggen
-              </button>
-              </a>
-            </div>
+    <div className="d-flex align-items-center vh vw">
+      <div className="container-fluid" >
+        <div className="row">
+          <div className="content-right col-6 d-flex justify-content-center">
+            <img src="../src\img\logo1.png" alt="" />
+          </div>
+          <div className="content-left col-6 d-flex justify-content-center flex-column">
+            <h1 className="text-center">MotorMax</h1>
+            <br />
+            <button className="" onClick={handleClick}><p>Inloggen met Google</p></button>
+            <br />
+            <button className="" onClick={handleClick}><p>Inloggen met Microsoft</p></button>
+            <br />
+            <hr />
+            <p className="p-0 m-0">Geen account?</p><br />
+            <button className="" onClick={handleClick}><p>Registreren met google</p></button>
+            <br />
+            <button className="" onClick={handleClick}><p>Registreren met Microsoft</p></button>
+            <br />
+            <p className="p-0 m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci praesentium laborum enim reiciendis recusandae laboriosam suscipit molestias! Earum nobis, quo blanditiis magnam est magni explicabo quam tempora deleniti, natus illo?</p>
           </div>
         </div>
       </div>
