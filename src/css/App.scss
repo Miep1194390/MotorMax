@@ -55,6 +55,8 @@ body {
   scroll-behavior: smooth;
 }
 
+
+
 // Header section
 .header {
   display: flex;
@@ -229,3 +231,48 @@ body {
 .buttonnostyle {
   all: unset;
 }
+
+.settings-page {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.settings-page__title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.settings-page__form-group {
+  margin-bottom: 20px;
+}
+
+.settings-page__label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.settings-page__input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.settings-page__checkbox {
+  margin-top: 5px;
+}
+
+.settings-page__button {
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
