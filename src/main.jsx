@@ -22,7 +22,6 @@ const Root = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/feed" element={localStorage.getItem('email') ? <Feed /> : <Navigate to="/login" />} />
           <Route path="/settings" element={localStorage.getItem('email') ? <Settings /> : <Navigate to="/login" />} />
-          <Route path="/berichten" element={<Berichten />} />
           <Route path="/Maak" element={<Maak />} />
           <Route path="*" element={<h1>Deze pagina bestaat niet man pa</h1>} />
         </Routes>
