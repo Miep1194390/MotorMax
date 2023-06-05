@@ -7,15 +7,13 @@ import Login from "./components/Login.jsx";
 import Admin from "./components/Admin.jsx";
 import Feed from "./components/Feed.jsx";
 import Settings from "./components/Settings.jsx";
-import Maak from "./components/Maken.jsx";
 import { auth } from "./firebase.js";
-import Berichten from "./components/Berichten.jsx";
 
 const Root = () => {
 
   // Check if the user is logged in
   const user = auth.currentUser;
-  const allowAccess = user !== null;
+  const allowAccess = user == null;
 
   return (
     <React.StrictMode>
@@ -40,7 +38,7 @@ const Root = () => {
             path="/feed"
             element={
               allowAccess ? (
-                <Settings />
+                <Feed />
               ) : (
                 <Navigate to="/login" replace={true} />
               )
@@ -48,7 +46,6 @@ const Root = () => {
           />
           <Route path="/feed" element={<Feed />} /> 
           <Route path="/settings" element={<Settings />} />
-          <Route path="/Maak" element={<Maak />} />
           <Route path="*" element={<h1>Deze pagina bestaat niet man pa</h1>} />
         </Routes>
       </BrowserRouter>
