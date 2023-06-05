@@ -11,10 +11,6 @@ import { auth } from "./firebase.js";
 
 const Root = () => {
 
-  // Check if the user is logged in
-  const user = auth.currentUser;
-  const allowAccess = user == null;
-
   return (
     <React.StrictMode>
       <BrowserRouter>
@@ -23,29 +19,9 @@ const Root = () => {
           <Route path="/hoewerkthet" element={<Hoewerkthet />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
-
-          <Route
-            path="/settings"
-            element={
-              allowAccess ? (
-                <Settings />
-              ) : (
-                <Navigate to="/login" replace={true} />
-              )
-            }
-          />
-          <Route
-            path="/feed"
-            element={
-              allowAccess ? (
-                <Feed />
-              ) : (
-                <Navigate to="/login" replace={true} />
-              )
-            }
-          />
-          <Route path="/feed" element={<Feed />} /> 
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/feed" element={localStorage.getItem('email') ? <Feed /> : <Navigate to="/login" />} />
+          <Route path="/settings" element={localStorage.getItem('email') ? <Settings /> : <Navigate to="/login" />} />
+          <Route path="/Maak" element={<Maak />} />
           <Route path="*" element={<h1>Deze pagina bestaat niet man pa</h1>} />
         </Routes>
       </BrowserRouter>
