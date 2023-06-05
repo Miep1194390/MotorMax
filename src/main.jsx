@@ -8,7 +8,7 @@ import Login from "./components/Login.jsx";
 import Admin from "./components/Admin.jsx";
 import Feed from "./components/Feed.jsx";
 import Settings from "./components/Settings.jsx";
-import Berichten from "./components/Berichten.jsx";
+import Maak from "./components/Maken.jsx";
 
 const Root = () => {
   return (
@@ -21,7 +21,7 @@ const Root = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/feed" element={<Feed />} /> 
           <Route path="/settings" element={<Settings />} />
-          <Route path="/berichten" element={<Berichten />} />
+          <Route path="/Maak" element={<Maak />} />
           <Route path="*" element={<h1>Deze pagina bestaat niet man pa</h1>} />
         </Routes>
       </BrowserRouter>
