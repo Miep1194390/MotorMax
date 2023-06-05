@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { auth, provider } from "../firebase";
-import { signInWithPopup, signOut } from "firebase/auth";
+import { signInWithPopup, signOut, onAuthStateChanged  } from "firebase/auth";
 import "firebase/compat/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -9,6 +9,7 @@ const Login = () => {
   const navigateTo = useNavigate();
 
   const handleClick = () => {
+
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
@@ -20,6 +21,7 @@ const Login = () => {
       .catch((error) => {
         console.error("Fout bij aanmelden:", error);
       });
+    
   };
 
   const handleLogout = () => {

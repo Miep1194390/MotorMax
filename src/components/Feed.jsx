@@ -10,7 +10,7 @@ const Feed = () => {
     const meetingsCollectionRef = collection(db, "meetings");
 
     useEffect(() => {
-
+        
         const getMeetings = async () => {
             const data = await getDocs(meetingsCollectionRef);
             setMeetings(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -18,17 +18,6 @@ const Feed = () => {
         getMeetings();
 
     }, []);
-
-    const handleLogout = () => {
-        signOut(auth)
-          .then(() => {
-            setUsername("");
-            localStorage.removeItem("email");
-          })
-          .catch((error) => {
-            console.error("Fout bij uitloggen:", error);
-          });
-      };
 
     return (
         <div className="d-flex">
