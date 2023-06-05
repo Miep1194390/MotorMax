@@ -8,9 +8,9 @@ import Admin from "./components/Admin.jsx";
 import Feed from "./components/Feed.jsx";
 import Settings from "./components/Settings.jsx";
 import { auth } from "./firebase.js";
+import Berichten from "./components/Berichten.jsx";
 
 const Root = () => {
-  const isAuthenticated = false;
 
   // Check if the user is logged in
   const user = auth.currentUser;
@@ -45,6 +45,10 @@ const Root = () => {
               )
             }
           />
+          <Route path="/feed" element={<Feed />} /> 
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/berichten" element={<Berichten />} />
+          <Route path="*" element={<h1>Deze pagina bestaat niet man pa</h1>} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>
