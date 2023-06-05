@@ -1,15 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { useSelector } from 'react-redux';
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import App from "./App.jsx";
 import Hoewerkthet from "./components/Hoewerkthet.jsx";
 import Login from "./components/Login.jsx";
 import Admin from "./components/Admin.jsx";
 import Feed from "./components/Feed.jsx";
 import Settings from "./components/Settings.jsx";
+import { auth } from "./firebase.js";
 
 const Root = () => {
+  const isAuthenticated = false;
+
+  // Check if the user is logged in
+  const user = auth.currentUser;
+  const allowAccess = user !== null;
 
   return (
     <React.StrictMode>
@@ -19,8 +24,27 @@ const Root = () => {
           <Route path="/hoewerkthet" element={<Hoewerkthet />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/feed" element={<Feed />} />
-          <Route path="/settings" element={<Settings />} />
+
+          <Route
+            path="/settings"
+            element={
+              allowAccess ? (
+                <Settings />
+              ) : (
+                <Navigate to="/login" replace={true} />
+              )
+            }
+          />
+          <Route
+            path="/feed"
+            element={
+              allowAccess ? (
+                <Settings />
+              ) : (
+                <Navigate to="/login" replace={true} />
+              )
+            }
+          />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>
