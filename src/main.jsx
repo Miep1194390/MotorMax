@@ -7,8 +7,8 @@ import Login from "./components/Login.jsx";
 import Admin from "./components/Admin.jsx";
 import Feed from "./components/Feed.jsx";
 import Settings from "./components/Settings.jsx";
+import Maak from "./components/Maken.jsx";
 import { auth } from "./firebase.js";
-import Berichten from "./components/Berichten.jsx";
 
 const Root = () => {
 
@@ -23,6 +23,7 @@ const Root = () => {
           <Route path="/feed" element={localStorage.getItem('email') ? <Feed /> : <Navigate to="/login" />} />
           <Route path="/settings" element={localStorage.getItem('email') ? <Settings /> : <Navigate to="/login" />} />
           <Route path="/berichten" element={<Berichten />} />
+          <Route path="/Maak" element={<Maak />} />
           <Route path="*" element={<h1>Deze pagina bestaat niet man pa</h1>} />
         </Routes>
       </BrowserRouter>

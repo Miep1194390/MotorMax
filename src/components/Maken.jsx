@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "./Header.jsx";
 
-const Berichten = () => {
+const Maken = () => {
     return (
         <div>
             <Header></Header>
-            <h1>Berichten</h1>
+            <h1>Maken</h1>
         </div>
     );
 }
 
-export default Berichten;
+export default Maken;
