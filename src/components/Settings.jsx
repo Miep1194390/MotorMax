@@ -25,31 +25,33 @@ const Settings = () => {
 
   const saveSettings = async () => {
     const user = auth.currentUser;
-
+  
     if (user) {
       try {
         await updateProfile(user, { displayName });
-        console.log("Naam aangepast.");
-
+  
         const userRef = doc(db, "users", user.uid);
         const docSnap = await getDoc(userRef);
-
+  
         if (docSnap.exists()) {
           await updateDoc(userRef, { isPrivate });
           console.log("Privacy instellingen aangepast.");
         } else {
           const newUser = {
-            displayName: user.displayName,
+            displayName,
             isPrivate,
           };
           await setDoc(userRef, newUser);
           console.log("Maakt nieuwe gebruiker aan in db.");
         }
+  
+        setDisplayName(displayName); // Update the state after the profile is updated
+        console.log("Naam aangepast.");
       } catch (error) {
         console.error("Error met updaten van instellingen:", error);
       }
     }
-  };
+  };  
 
   return (
     <div className="settings-page">
