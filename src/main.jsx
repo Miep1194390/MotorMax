@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import App from "./App.jsx";
 import Hoewerkthet from "./components/Hoewerkthet.jsx";
 import Login from "./components/Login.jsx";
-import Admin from "./components/Admin.jsx";
+import Maak from "./components/Maak.jsx";
 import Feed from "./components/Feed.jsx";
 import Settings from "./components/Settings.jsx";
 import { auth } from "./firebase.js";
@@ -17,7 +17,7 @@ const Root = () => {
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/hoewerkthet" element={<Hoewerkthet />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/Maak" element={<Maak />} />
           <Route path="/login" element={<Login />} />
           <Route path="/feed" element={localStorage.getItem('email') ? <Feed /> : <Navigate to="/login" />} />
           <Route path="/settings" element={localStorage.getItem('email') ? <Settings /> : <Navigate to="/login" />} />
