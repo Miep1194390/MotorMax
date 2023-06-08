@@ -36,15 +36,17 @@ const Settings = () => {
         const docSnap = await getDoc(userRef);
 
         if (docSnap.exists()) {
-          await updateDoc(userRef, {
-            displayName: displayName,
-            isPrivate,
-          });
+          const updatedData = { displayName };
+          if (isPrivate) {
+            updatedData.isPrivate = isPrivate;
+          }
+
+          await updateDoc(userRef, updatedData);
           console.log("Privacy instellingen aangepast.");
           setFeedbackMessage("Instellingen succesvol opgeslagen!");
         } else {
           const newUser = {
-            displayName: displayName,
+            displayName,
             isPrivate,
           };
           await setDoc(userRef, newUser);

@@ -17,7 +17,7 @@ const Root = () => {
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/hoewerkthet" element={<Hoewerkthet />} />
-          <Route path="/Maak" element={<Maak />} />
+          <Route path="/maak" element={localStorage.getItem('email') ? <Maak /> : <Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/feed" element={localStorage.getItem('email') ? <Feed /> : <Navigate to="/login" />} />
           <Route path="/settings" element={localStorage.getItem('email') ? <Settings /> : <Navigate to="/login" />} />
