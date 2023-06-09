@@ -51,31 +51,31 @@ const Admin = () => {
     <div className="container-fluid maak-container">
       <div className="row">
         <div className="col-lg-3">
-          <div className="sidebar">
+          <div className="sidebar-maak">
             <Link to="/">TERUG</Link>
-            <input placeholder="Titel..." value={newTitle} onChange={(event) => setNewTitle(event.target.value)}></input>
-            <input placeholder="Beschrijving..." value={newDescription} onChange={(event) => setNewDescription(event.target.value)}></input>
-            <input placeholder="Locatie..." value={newLocation} onChange={(event) => setNewLocation(event.target.value)}></input>
-            <input placeholder="Start datum..." value={newStartDate} onChange={(event) => setNewStartDate(event.target.value)}></input>
-            <input placeholder="Eind datum..." value={newEndDate} onChange={(event) => setNewEndDate(event.target.value)}></input>
-            <input placeholder="Tijdstip..." value={newTime} onChange={(event) => setNewTime(event.target.value)}></input>
-            <button className="sidebar-logout-button" onClick={createMeeting}>Maak meeting</button>
+            <input placeholder="Titel" value={newTitle} onChange={(event) => setNewTitle(event.target.value)}></input>
+            <input placeholder="Beschrijving" value={newDescription} onChange={(event) => setNewDescription(event.target.value)}></input>
+            <input placeholder="Locatie" value={newLocation} onChange={(event) => setNewLocation(event.target.value)}></input>
+            <input placeholder="Start datum" value={newStartDate} onChange={(event) => setNewStartDate(event.target.value)}></input>
+            <input placeholder="Eind datum" value={newEndDate} onChange={(event) => setNewEndDate(event.target.value)}></input>
+            <input placeholder="Tijdstip" value={newTime} onChange={(event) => setNewTime(event.target.value)}></input>
+            <button className="sidebar-maak-button" onClick={createMeeting}>Maak meeting</button>
           </div>
         </div>
         <div className="col-lg-9">
           <div className="meetings">
             {meetings.map((meeting) => {
               return (
-                <div key={meeting.id} className="feed-container_item col-12 col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6 text-center">
-                  <ul className="maak-list d-flex">
-                    <li>Titel: {meeting.title}</li>
-                    <li>Beschrijving: {meeting.description}</li>
-                    <li>Locatie: {meeting.location}</li>
-                    <li>Start datum: {meeting.start_date}</li>
-                    <li>Eind datum: {meeting.end_date}</li>
-                    <li>Tijdstip: {meeting.time}</li>
-                    <button className="sidebar-logout-button" onClick={() => deleteMeeting(meeting.id)}>Verwijder meeting</button>
-                  </ul>
+                <div key={meeting.id} className="maak-container_item mx-3 my-3 col-xxl-11">
+                  <h2>Titel: {meeting.title}</h2>
+                  <p>Beschrijving: {meeting.description}</p>
+                  <p>Locatie: {meeting.location}</p>
+                  <p>Start datum: {meeting.start_date}</p>
+                  <p>Eind datum: {meeting.end_date}</p>
+                  <p>Tijdstip: {meeting.time}</p>
+                  <div className="d-flex justify-content-end">
+                    <button className="verwijder-post-button" onClick={() => deleteMeeting(meeting.id)}>Verwijder meeting</button>
+                  </div>
                 </div>
               );
             })}
