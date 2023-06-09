@@ -239,6 +239,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }
 
 .settings-page-inner {
@@ -246,6 +247,7 @@ body {
   width: 35vw;
   height: 65vh;
   padding: 5%;
+  border: 1px solid #dbdbdb;
 }
 
 .settings-page__title {
