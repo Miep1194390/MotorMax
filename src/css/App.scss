@@ -181,6 +181,7 @@ body {
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 10px;
+    margin-left: .5rem;
   }
   .sidebar-logout-button {
     display: block;
@@ -227,6 +228,24 @@ body {
     transition: .25s;
   }
   
+}
+
+.sidebar-search {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #dbdbdb;
+  margin-bottom: 2.5rem;
+}
+
+.sidebar-search:hover {
+  border-bottom: 2px solid #ff6600;
+  transition: .25s;
+  outline: none;
+}
+.sidebar-search:focus {
+  transition: .25s;
+  outline: none;
 }
 
 .vh {
@@ -314,8 +333,15 @@ body {
   justify-content: space-between;
   padding: 20px;
   input:focus {
-    border: 1px solid #ff6600;
+    border-bottom: 2px solid #ff6600;
+    transition: .25s;
     outline: none;
+  }
+  input {
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    transition: .25s;
   }
   .sidebar-maak-button {
     display: block;
@@ -328,6 +354,12 @@ body {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: .25s;
+  }
+  .sidebar-maak-button:hover {
+    transform: scale(1.05);
+    transition: .25s;
+    box-shadow: 1px 10px 25px 4px rgba(0,0,0,0.20);
   }
 }
 
@@ -364,4 +396,3 @@ body {
     transition: .25s;
   }
 }
-

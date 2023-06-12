@@ -59,7 +59,7 @@ const Admin = () => {
             <input placeholder="Start datum" value={newStartDate} onChange={(event) => setNewStartDate(event.target.value)}></input>
             <input placeholder="Eind datum" value={newEndDate} onChange={(event) => setNewEndDate(event.target.value)}></input>
             <input placeholder="Tijdstip" value={newTime} onChange={(event) => setNewTime(event.target.value)}></input>
-            <button className="sidebar-maak-button" onClick={createMeeting}>Maak meeting</button>
+            <button className="sidebar-maak-button" onClick={createMeeting}>Meeting aanmaken</button>
           </div>
         </div>
         <div className="col-lg-9">

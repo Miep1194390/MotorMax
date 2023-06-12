@@ -40,6 +40,7 @@ const Login = () => {
         const userData = {
           displayName: user.displayName,
           email: user.email,
+          profilePicture: user.photoURL,
           // Add any additional user data you want to store in Firestore
         };
 
