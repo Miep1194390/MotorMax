@@ -4,7 +4,7 @@ import { db } from "../firebase.js";
 import { Link } from 'react-router-dom';
 import "../css/App.scss";
 
-const Admin = () => {
+const Maak = () => {
   const meetingsCollectionRef = collection(db, "meetings");
 
   const [meetings, setMeetings] = useState([]);
@@ -86,4 +86,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Maak;
