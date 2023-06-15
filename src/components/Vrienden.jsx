@@ -1,33 +1,16 @@
 import React, { useState } from "react";
-import { db } from "../firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
 
 const Vrienden = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const collectionRef = collection(db, "users");
 
-  const handleSearch = async () => {
-    try {
-      const querySnapshot = await getDocs(
-        query(
-          collectionRef,
-          where("displayName", "==", searchQuery),
-          where("email", "==", searchQuery),
-        )
-      );
-
-      console.log("Query Snapshot:", querySnapshot);
-      const results = [];
-      querySnapshot.forEach((doc) => {
-        results.push(doc.data());
-        
-      });
-
-      setSearchResults(results);
-    } catch (error) {
-      console.error("Error searching for users:", error);
-    }
+  const handleSearch = () => {
+    const filteredUsers = users.filter(
+      (user) =>
+        user.displayName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setSearchResults(filteredUsers);
   };
 
   return (
@@ -39,22 +22,17 @@ const Vrienden = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <button onClick={handleSearch}>Search</button>
-      {searchResults.length > 0 ? (
-        <ul>
-          {searchResults.map((user) => (
-            <li key={user.id}>
-              <div>
-                <strong>Name:</strong> {user.displayName}
-              </div>
-              <div>
-                <strong>Email:</strong> {user.email}
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No search results</p>
-      )}
+
+      <div>
+        {searchResults.map((user) => (
+          <div key={user.uid}>
+            <h3>{user.displayName}</h3>
+            <p>Email: {user.email}</p>
+            <img src={user.profilePicture} alt="Profile" />
+            <button>Add Friend</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
