@@ -14,7 +14,7 @@ const Login = () => {
       if (user) {
         setUsername(user.displayName);
         localStorage.setItem("email", user.email);
-        navigateTo("/feed"); // Redirect to /feed if already logged in
+        navigateTo("/feed");
       } else {
         setUsername("");
         localStorage.removeItem("email");
@@ -40,7 +40,6 @@ const Login = () => {
         const userData = {
           displayName: user.displayName,
           email: user.email,
-          // Add any additional user data you want to store in Firestore
         };
 
         setDoc(userDoc, userData)

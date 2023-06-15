@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { collection, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
-import { db } from "../firebase.js";
 import { Link } from 'react-router-dom';
 import "../css/App.scss";
+import { db } from "../firebase";
 
 const Admin = () => {
   const meetingsCollectionRef = collection(db, "meetings");
