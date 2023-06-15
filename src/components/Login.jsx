@@ -4,6 +4,7 @@ import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
+import logo from "/public/logo2.png";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -40,6 +41,8 @@ const Login = () => {
         const userData = {
           displayName: user.displayName,
           email: user.email,
+          profilePicture: user.photoURL,
+          // Add any additional user data you want to store in Firestore
         };
 
         setDoc(userDoc, userData)
@@ -66,43 +69,17 @@ const Login = () => {
       });
   };
 
+
   return (
-    <div className="d-flex align-items-center vh vw">
-      <div className="container-fluid">
-        <div className="row">
-          <div className="content-right col-6 d-flex justify-content-center">
-            <img src="../src\img\logo1.png" alt="" />
-          </div>
-          <div className="content-left col-6 d-flex justify-content-center flex-column">
-            <h1 className="text-center">MotorMax</h1>
-            <br />
-            <button className="" onClick={() => handleClick(provider)}>
-              <p>Inloggen met Google</p>
-            </button>
-            <br />
-            <button className="" onClick={() => handleClick(provider)}>
-              <p>Inloggen met Microsoft</p>
-            </button>
-            <br />
-            <hr />
-            <p className="p-0 m-0">Geen account?</p>
-            <br />
-            <button className="" onClick={handleClick}>
-              <p>Registreren met Google</p>
-            </button>
-            <br />
-            <button className="" onClick={handleClick}>
-              <p>Registreren met Microsoft</p>
-            </button>
-            <br />
-            <p className="p-0 m-0">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-              praesentium laborum enim reiciendis recusandae laboriosam suscipit
-              molestias! Earum nobis, quo blanditiis magnam est magni explicabo
-              quam tempora deleniti, natus illo?
-            </p>
-          </div>
+    <div className="container-fluid login-bg">
+      <div className="row justify-content-center align-items-center vh-100">
+        <div className="col-9 login-box d-flex flex-column align-items-center justify-content-center text-center">
+          <h1 className="text-white ">Inloggen</h1>
+          <button className="login-button" onClick={() => handleClick(provider)}>
+            Inloggen met Google
+          </button>
         </div>
+        <div className="col-3"></div>
       </div>
     </div>
   );
