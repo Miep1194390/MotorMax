@@ -30,7 +30,7 @@ const Feed = () => {
         getProfilePictures();
 
         return () => {
-            unsubscribe(); // Cleanup by unsubscribing the listener
+            unsubscribe(); 
         };
     }, []);
 
