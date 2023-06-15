@@ -14,7 +14,8 @@ const Login = () => {
       if (user) {
         setUsername(user.displayName);
         localStorage.setItem("email", user.email);
-        navigateTo("/feed"); // Redirect to /feed if already logged in
+        localStorage.setItem("uid", user.uid);
+        navigateTo("/feed");
       } else {
         setUsername("");
         localStorage.removeItem("email");
@@ -31,6 +32,7 @@ const Login = () => {
         console.log("Gebruikersinformatie:", user);
         localStorage.setItem("username", user.displayName);
         localStorage.setItem("email", user.email);
+        localStorage.setItem("uid", user.uid);
         navigateTo("/feed");
 
         const db = getFirestore();
@@ -40,8 +42,8 @@ const Login = () => {
         const userData = {
           displayName: user.displayName,
           email: user.email,
+          uid: user.uid,
           profilePicture: user.photoURL,
-          // Add any additional user data you want to store in Firestore
         };
 
         setDoc(userDoc, userData)
