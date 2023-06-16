@@ -33,7 +33,6 @@ const Login = () => {
         localStorage.setItem("username", user.displayName);
         localStorage.setItem("email", user.email);
         localStorage.setItem("uid", user.uid);
-        navigateTo("/feed");
 
         const db = getFirestore();
         const usersCollection = collection(db, "users");
@@ -49,6 +48,7 @@ const Login = () => {
         setDoc(userDoc, userData)
           .then(() => {
             console.log("User document created in Firestore");
+            navigateTo("/feed", { state: { userData } });
           })
           .catch((error) => {
             console.error("Error creating user document in Firestore:", error);
@@ -58,18 +58,6 @@ const Login = () => {
         console.error("Fout bij aanmelden:", error);
       });
   };
-
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        setUsername("");
-        localStorage.removeItem("email");
-      })
-      .catch((error) => {
-        console.error("Fout bij uitloggen:", error);
-      });
-  };
-
 
   return (
     <div className="container-fluid login-bg">
