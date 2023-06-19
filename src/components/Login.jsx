@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { collection, doc, setDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const navigateTo = useNavigate();
@@ -73,5 +74,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;
