@@ -6,6 +6,7 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import logo from "/public/logo2.png";
 
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const navigateTo = useNavigate();
@@ -86,5 +87,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;
