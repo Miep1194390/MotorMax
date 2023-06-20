@@ -10,6 +10,7 @@ import {
   addDoc,
   doc,
   updateDoc,
+  getDoc,
 } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
@@ -19,10 +20,10 @@ function Vrienden() {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [friendRequests, setFriendRequests] = useState([]);
+  const [friends, setFriends] = useState([]);
 
   const user = localStorage.getItem("uid");
 
-  // Function to search Firestore collection
   const searchFirestore = async () => {
     setSearchResults([]);
 
@@ -63,7 +64,8 @@ function Vrienden() {
   const fetchFriendRequests = async () => {
     const q = query(
       collection(db, "friendRequests"),
-      where("recipientId", "==", user)
+      where("recipientId", "==", user),
+      where("status", "==", "pending")
     );
 
     try {
@@ -84,10 +86,14 @@ function Vrienden() {
     try {
       await updateDoc(requestDocRef, { status: "accepted" });
       console.log("Friend request accepted successfully");
-      // Optionally, you can remove the request from the friendRequests state.
       setFriendRequests((prevRequests) =>
         prevRequests.filter((r) => r.id !== request.id)
       );
+
+      setFriends((prevFriends) => [
+        ...prevFriends,
+        { id: request.senderId, ...request },
+      ]);
     } catch (error) {
       console.log("Error accepting friend request:", error);
     }
@@ -99,7 +105,6 @@ function Vrienden() {
     try {
       await updateDoc(requestDocRef, { status: "denied" });
       console.log("Friend request denied successfully");
-      // Optionally, you can remove the request from the friendRequests state.
       setFriendRequests((prevRequests) =>
         prevRequests.filter((r) => r.id !== request.id)
       );
@@ -108,8 +113,50 @@ function Vrienden() {
     }
   };
 
+  const fetchFriends = async () => {
+    const q = query(
+      collection(db, "friendRequests"),
+      where("status", "==", "accepted"),
+      where("recipientId", "==", user)
+    );
+
+    try {
+      const querySnapshot = await getDocs(q);
+      const acceptedRequests = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          senderId: data.senderId,
+          status: data.status,
+          displayName: "",
+          email: "",
+        };
+      });
+
+      const friendRequests = acceptedRequests.map(async (request) => {
+        const friendDocRef = doc(db, "users", request.senderId);
+        const friendDocSnapshot = await getDoc(friendDocRef);
+
+        if (friendDocSnapshot.exists()) {
+          const friendData = friendDocSnapshot.data();
+          request.displayName = friendData.displayName;
+          request.email = friendData.email;
+        }
+
+        return request;
+      });
+
+      const updatedRequests = await Promise.all(friendRequests);
+
+      setFriends(updatedRequests);
+    } catch (error) {
+      console.log("Error fetching friends:", error);
+    }
+  };
+
   useEffect(() => {
     fetchFriendRequests();
+    fetchFriends();
   }, []);
 
   return (
@@ -151,6 +198,16 @@ function Vrienden() {
                 Accept
               </button>
               <button onClick={() => denyFriendRequest(request)}>Deny</button>
+              <hr />
+            </div>
+          ))}
+
+          <h2>Friends</h2>
+          {friends.map((friend) => (
+            <div key={friend.id}>
+              <p>Id: {friend.senderId}</p>
+              <p>Name: {friend.displayName}</p>
+              <p>Email: {friend.email}</p>
               <hr />
             </div>
           ))}
