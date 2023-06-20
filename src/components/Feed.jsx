@@ -87,7 +87,7 @@ const Feed = () => {
             <input
               className="feed-search"
               type="text"
-              placeholder="Meeting zoeken"
+              placeholder="Meeting zoeken..."
               name="zoeken"
               id="zoeken"
               value={searchKeyword}

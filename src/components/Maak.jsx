@@ -5,7 +5,6 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "../css/App.scss";
 import { db } from "../firebase";
 
-
 const Maak = () => {
   const meetingsCollectionRef = collection(db, "meetings");
 
