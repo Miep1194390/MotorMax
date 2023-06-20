@@ -5,7 +5,6 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "../css/App.scss";
 import { db } from "../firebase";
 
-
 const Maak = () => {
   const meetingsCollectionRef = collection(db, "meetings");
 
@@ -143,13 +142,6 @@ const Maak = () => {
                     className="maak-container_item mx-3 my-3 col-xxl-11"
                   >
                     <div className="post-content">
-                      <div className="post-image">
-                        <img
-                          className="w-100"
-                          src={meeting.backgroundImage}
-                          alt="Meeting background"
-                        />
-                      </div>
                       <div className="post-body">
                         <h2>{meeting.title}</h2>
                         <p>{meeting.description}</p>

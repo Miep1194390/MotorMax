@@ -7,6 +7,7 @@ const Feed = () => {
   const [meetings, setMeetings] = useState([]);
   const meetingsCollectionRef = collection(db, "meetings");
   const [users, setUsers] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   useEffect(() => {
     const getMeetings = async () => {
@@ -52,10 +53,18 @@ const Feed = () => {
           className="border border-3 border-black-subtle rounded-circle w-100 h-100"
           src="https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg"
           alt="profiel"
-        />  
+        />
       );
     }
   };
+
+  const handleSearchInputChange = (event) => {
+    setSearchKeyword(event.target.value);
+  };
+
+  const filteredMeetings = meetings.filter((meeting) => {
+    return meeting.title.toLowerCase().includes(searchKeyword.toLowerCase());
+  });
 
   return (
     <div className="d-flex">
@@ -73,8 +82,21 @@ const Feed = () => {
             </div>
           ))}
         </div>
+        <div className="row">
+          <div className="">
+            <input
+              className="feed-search"
+              type="text"
+              placeholder="Meeting zoeken..."
+              name="zoeken"
+              id="zoeken"
+              value={searchKeyword}
+              onChange={handleSearchInputChange}
+            />
+          </div>
+        </div>
         <div className="row d-flex justify-content-center">
-          {meetings.map((meeting) => (
+          {filteredMeetings.map((meeting) => (
             <div key={meeting.id} className="feed-container_item mx-3 my-3 col-6">
               <h2>Titel: {meeting.title}</h2>
               <p>Beschrijving: {meeting.description}</p>
