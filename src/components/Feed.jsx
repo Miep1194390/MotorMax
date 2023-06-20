@@ -37,6 +37,26 @@ const Feed = () => {
     return users.find((user) => user.id === userId);
   };
 
+  const renderProfilePicture = (user) => {
+    if (user.profilePicture) {
+      return (
+        <img
+          className="border border-3 border-black-subtle rounded-circle w-100 h-100"
+          src={user.profilePicture}
+          alt="profiel"
+        />
+      );
+    } else {
+      return (
+        <img
+          className="border border-3 border-black-subtle rounded-circle w-100 h-100"
+          src="https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg"
+          alt="profiel"
+        />  
+      );
+    }
+  };
+
   return (
     <div className="d-flex">
       <Sidebar />
@@ -46,11 +66,7 @@ const Feed = () => {
             <div key={user.id} className="col-1">
               <div className="vrienden-feed">
                 <div className="vrienden-profiel">
-                  <img
-                    className="border border-3 border-black-subtle rounded-circle w-100 h-100"
-                    src={user.profilePicture}
-                    alt="profiel"
-                  />
+                  {renderProfilePicture(user)}
                 </div>
                 <p>{user.name}</p>
               </div>
