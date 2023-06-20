@@ -146,7 +146,7 @@ function Vrienden() {
 
           {friendRequests.map((request) => (
             <div key={request.id}>
-              <p>Name: {request.senderId}</p>
+              <p>Id: {request.senderId}</p>
               <button onClick={() => acceptFriendRequest(request)}>
                 Accept
               </button>
