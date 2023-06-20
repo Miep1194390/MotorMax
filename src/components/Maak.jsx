@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  collection,
-  onSnapshot,
-  addDoc,
-  deleteDoc,
-  doc,
-  setDoc,
-  getDoc,
-} from "firebase/firestore";
+import { collection, onSnapshot, addDoc, deleteDoc, doc, setDoc, getDoc,} from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "../css/App.scss";
 import { db } from "../firebase";
+
 
 const Maak = () => {
   const meetingsCollectionRef = collection(db, "meetings");
@@ -148,25 +141,31 @@ const Maak = () => {
                   <div
                     key={meeting.id}
                     className="maak-container_item mx-3 my-3 col-xxl-11"
-                    style={{
-                      backgroundImage: meeting.backgroundImage
-                        ? `url(${meeting.backgroundImage})`
-                        : "",
-                    }}
                   >
-                    <h2>Titel: {meeting.title}</h2>
-                    <p>Beschrijving: {meeting.description}</p>
-                    <p>Locatie: {meeting.location}</p>
-                    <p>Start datum: {meeting.start_date}</p>
-                    <p>Eind datum: {meeting.end_date}</p>
-                    <p>Tijdstip: {meeting.time}</p>
-                    <div className="d-flex justify-content-end">
-                      <button
-                        className="verwijder-post-button"
-                        onClick={() => deleteMeeting(meeting.id)}
-                      >
-                        Verwijder meeting
-                      </button>
+                    <div className="post-content">
+                      <div className="post-image">
+                        <img
+                          className="w-100"
+                          src={meeting.backgroundImage}
+                          alt="Meeting background"
+                        />
+                      </div>
+                      <div className="post-body">
+                        <h2>{meeting.title}</h2>
+                        <p>{meeting.description}</p>
+                        <p>Locatie: {meeting.location}</p>
+                        <p>Start datum: {meeting.start_date}</p>
+                        <p>Eind datum: {meeting.end_date}</p>
+                        <p>Tijdstip: {meeting.time}</p>
+                      </div>
+                      <div className="post-actions">
+                        <button
+                          className="verwijder-post-button"
+                          onClick={() => deleteMeeting(meeting.id)}
+                        >
+                          Verwijder meeting
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );
