@@ -17,7 +17,7 @@ const Maak = () => {
   const [newTime, setNewTime] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
   const [imageFile, setImageFile] = useState(null);
-  const [editingMeetingId, setEditingMeetingId] = useState(null); // Toegevoegde state voor de ID van de te bewerken vergadering
+  const [editingMeetingId, setEditingMeetingId] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(meetingsCollectionRef, (snapshot) => {
@@ -72,7 +72,7 @@ const Maak = () => {
     if (editingMeetingId) {
       const meetingDoc = doc(db, "meetings", editingMeetingId);
       await updateDoc(meetingDoc, meetingData);
-      setEditingMeetingId(null); 
+      setEditingMeetingId(null);
     } else {
       await addDoc(meetingsCollectionRef, meetingData);
     }
@@ -112,27 +112,26 @@ const Maak = () => {
         <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
           <div className="sidebar-maak">
             <Link to="/">TERUG</Link>
-            <input type="text" placeholder="Titel" value={newTitle} onChange={(event) => setNewTitle(event.target.value)}/>
-            <input type="text" placeholder="Beschrijving" value={newDescription} onChange={(event) => setNewDescription(event.target.value)}/>
-            <input type="text" placeholder="Locatie" value={newLocation} onChange={(event) => setNewLocation(event.target.value)}/>
-            <input type="date" placeholder="Start datum" value={newStartDate} onChange={(event) => setNewStartDate(event.target.value)} min={currentDate}/>
+            <input type="text" placeholder="Titel" value={newTitle} onChange={(event) => setNewTitle(event.target.value)} />
+            <input type="text" placeholder="Beschrijving" value={newDescription} onChange={(event) => setNewDescription(event.target.value)} />
+            <input type="text" placeholder="Locatie" value={newLocation} onChange={(event) => setNewLocation(event.target.value)} />
+            <input type="date" placeholder="Start datum" value={newStartDate} onChange={(event) => setNewStartDate(event.target.value)} min={currentDate} />
             <input type="date" placeholder="Eind datum" value={newEndDate} onChange={(event) => setNewEndDate(event.target.value)} min={currentDate} />
             <input type="time" placeholder="Tijdstip" value={newTime} onChange={(event) => setNewTime(event.target.value)} />
+            <input type="file" onChange={(event) => setImageFile(event.target.files[0])} />
             <button className="sidebar-maak-button" onClick={createMeeting}>
               {editingMeetingId ? "Vergadering bijwerken" : "Meeting aanmaken"}
             </button>
           </div>
         </div>
-        <div className="col-xxl-9 col-xl-9 col-lg-9 col-md-9">
+
+        <div className="feed-item-container mx-3 my-3 col-6">
           <div className="meetings">
             {meetings
               .filter((meeting) => meeting.uid === currentUser?.uid)
               .map((meeting) => {
                 return (
-                  <div
-                    key={meeting.id}
-                    className="maak-container_item mx-3 my-3 col-xxl-11"
-                  >
+                  <div key={meeting.id} className="maak-container_item mx-3 my-3 col-xxl-11">
                     <div className="post-content">
                       <div className="post-body">
                         <h2>{meeting.title}</h2>
