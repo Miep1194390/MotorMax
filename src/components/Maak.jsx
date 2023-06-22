@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { collection, onSnapshot, addDoc, deleteDoc, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "../css/App.scss";
@@ -111,43 +120,98 @@ const Maak = () => {
       <div className="row">
         <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
           <div className="sidebar-maak">
-            <Link to="/">TERUG</Link>
-            <input type="text" placeholder="Titel" value={newTitle} onChange={(event) => setNewTitle(event.target.value)} />
-            <input type="text" placeholder="Beschrijving" value={newDescription} onChange={(event) => setNewDescription(event.target.value)} />
-            <input type="text" placeholder="Locatie" value={newLocation} onChange={(event) => setNewLocation(event.target.value)} />
-            <input type="date" placeholder="Start datum" value={newStartDate} onChange={(event) => setNewStartDate(event.target.value)} min={currentDate} />
-            <input type="date" placeholder="Eind datum" value={newEndDate} onChange={(event) => setNewEndDate(event.target.value)} min={currentDate} />
-            <input type="time" placeholder="Tijdstip" value={newTime} onChange={(event) => setNewTime(event.target.value)} />
-            <input type="file" onChange={(event) => setImageFile(event.target.files[0])} />
+            <Link className="Link-Terug" to="/">
+              <button className="button-terug">Terug</button>
+            </Link>
+            <input
+              type="text"
+              placeholder="Titel"
+              value={newTitle}
+              onChange={(event) => setNewTitle(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Beschrijving"
+              value={newDescription}
+              onChange={(event) => setNewDescription(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Locatie"
+              value={newLocation}
+              onChange={(event) => setNewLocation(event.target.value)}
+            />
+            <input
+              type="date"
+              placeholder="Start datum"
+              value={newStartDate}
+              onChange={(event) => setNewStartDate(event.target.value)}
+              min={currentDate}
+            />
+            <input
+              type="date"
+              placeholder="Eind datum"
+              value={newEndDate}
+              onChange={(event) => setNewEndDate(event.target.value)}
+              min={currentDate}
+            />
+            <input
+              type="time"
+              placeholder="Tijdstip"
+              value={newTime}
+              onChange={(event) => setNewTime(event.target.value)}
+            />
+            <div className="file-input">
+              <label htmlFor="file-upload">
+                <svg
+                  className="file-logo"
+                  xmlns="http://www.w3.org/2000/svg"
+                  data-name="Layer 1"
+                  viewBox="0 0 24 24"
+                  id="upload-to-cloud"
+                >
+                  <path d="M18.42,8.22A7,7,0,0,0,5.06,10.11,4,4,0,0,0,6,18a1,1,0,0,0,0-2,2,2,0,0,1,0-4,1,1,0,0,0,1-1,5,5,0,0,1,9.73-1.61,1,1,0,0,0,.78.67,3,3,0,0,1,.24,5.84,1,1,0,0,0,.5,1.94,5,5,0,0,0,.17-9.62Zm-5.71,2.07a1,1,0,0,0-.33-.21,1,1,0,0,0-.76,0,1,1,0,0,0-.33.21l-3,3a1,1,0,0,0,1.42,1.42L11,13.41V19a1,1,0,0,0,2,0V13.41l1.29,1.3a1,1,0,0,0,1.42,0,1,1,0,0,0,0-1.42Z"></path>
+                </svg>
+              </label>
+              <input
+                type="file"
+                id="file-upload"
+                onChange={(event) => setImageFile(event.target.files[0])}
+              />
+            </div>
             <button className="sidebar-maak-button" onClick={createMeeting}>
               {editingMeetingId ? "Vergadering bijwerken" : "Meeting aanmaken"}
             </button>
           </div>
         </div>
 
-        <div className="feed-item-container mx-3 my-3 col-6">
+        <div className="feed-item-container mx-3 my-3 col-8">
           <div className="meetings">
             {meetings
               .filter((meeting) => meeting.uid === currentUser?.uid)
               .map((meeting) => {
                 return (
-                  <div key={meeting.id} className="maak-container_item mx-3 my-3 col-xxl-11">
-                    <div className="post-content">
+                  <div key={meeting.id} className="maak-container_item mx-3 my-3 col-xxl-5">
+                    <div className="post-content bg-white p-3 rounded">
                       <div className="post-body">
-                        <h2>{meeting.title}</h2>
-                        <p>{meeting.description}</p>
-                        <p>Locatie: {meeting.location}</p>
-                        <p>Start datum: {meeting.start_date}</p>
-                        <p>Eind datum: {meeting.end_date}</p>
-                        <p>Tijdstip: {meeting.time}</p>
+                        <h2 className="text-dark">Titel: {meeting.title}</h2>
+                        <p className="text-muted">Beschrijving: {meeting.description}</p>
+                        <p className="text-muted">Locatie: {meeting.location}</p>
+                        <p className="text-muted">Start datum: {meeting.start_date}</p>
+                        <p className="text-muted">Eind datum: {meeting.end_date}</p>
+                        <p className="text-muted">Tijdstip: {meeting.time}</p>
                       </div>
-                      <div className="post-actions">
-                        <button className="verwijder-post-button" onClick={() => deleteMeeting(meeting.id)}>Verwijder meeting</button>
-                        <button className="bewerk-post-button" onClick={() => editMeeting(meeting.id)}>Bewerk meeting</button>
+                      <div className="post-actions mt-3">
+                      <button className="bewerk-post-button btn btn-success" onClick={() => editMeeting(meeting.id)}>
+                          Bewerk meeting
+                        </button>
+                        <button className="verwijder-post-button btn btn-danger" onClick={() => deleteMeeting(meeting.id)}>
+                          Verwijder meeting
+                        </button>
                       </div>
                     </div>
                   </div>
-                );
+                );                
               })}
           </div>
         </div>

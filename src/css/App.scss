@@ -80,6 +80,82 @@ body {
   }
 }
 
+// Terug Button
+.Link-Terug {
+  color: white;
+  text-decoration: none;
+}
+
+// Input File
+.file-input {
+  display: flex;
+  justify-content: center;
+  background-color: orange;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.file-logo {
+  height: 24px;
+  width: 24px;
+  margin-right: 5px;
+}
+
+.file-text {
+  color: white;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+
+.button-terug {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #fa6400;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-terug:hover,
+.button-terug:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-terug:hover {
+  transform: translateY(-1px);
+}
+
+.button-terug:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+
 // Hero section
 .hero-container {
   margin-top: 130px;
@@ -394,62 +470,57 @@ body {
 }
 
 .maak-container_item {
-  background-color: #ff6600;
-  p {
-    color: #f5f5f5;
-  }
+  background-color: #f5f5f5;
 }
 
 .verwijder-post-button {
-  align-items: center;
-  background-clip: padding-box;
   background-color: #ff4000;
-  border: 1px solid transparent;
-  border-radius: .25rem;
-  box-sizing: border-box;
-  color: #fff;  
-  cursor: pointer;
-  display: inline-flex;
-  font-size: 16px;
-  font-weight: 300;
-  line-height: 1.25;
-  margin: 0;
-  min-height: 3rem;
-  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-  position: relative;
-  text-decoration: none;
-  transition: all 250ms;
-  user-select: none;  
-  &:hover {
-    background-color: #ff0000;
-    transition: .25s;
-  }
+  color: #ffffff;
+  border: none;
 }
 
-.bewerk-post-button {
-  align-items: center;
-  background-clip: padding-box;
-  background-color: #1e8000;
-  border: 1px solid transparent;
-  border-radius: .25rem;
-  box-sizing: border-box;
-  color: #fff;  
-  cursor: pointer;
-  display: inline-flex;
+.verwijder-post-button:hover {
+  background-color: #ff0000;
+}
+
+.post-content {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.post-body h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000000;
+}
+
+.post-body p {
   font-size: 16px;
-  font-weight: 300;
-  line-height: 1.25;
-  margin: 0;
-  min-height: 3rem;
-  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-  position: relative;
-  text-decoration: none;
-  transition: all 250ms;
-  user-select: none;  
-  &:hover {
-    background-color: #26a100;
-    transition: .25s;
-  }
+  color: #666666;
+  margin-bottom: 5px;
+}
+
+.post-actions button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+
+
+
+.bewerk-post-button {
+  background-color: #1e8000;
+  color: #ffffff;
+  border: none;
+}
+
+.bewerk-post-button:hover {
+  background-color: #128000;
 }
 
 .login-bg {

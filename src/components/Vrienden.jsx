@@ -1,22 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import {
-  getFirestore,
-  collection,
-  query,
-  where,
-  getDocs,
-  addDoc,
-  doc,
-  updateDoc,
-  getDoc,
-} from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs, addDoc, doc, updateDoc, getDoc } from "firebase/firestore";
 import { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { Link } from "react-router-dom";
 
-function Vrienden() {
+const Vrienden = () => {
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [friendRequests, setFriendRequests] = useState([]);
@@ -24,6 +14,7 @@ function Vrienden() {
 
   const user = localStorage.getItem("uid");
 
+  // Zoek gebruikers in Firestore op basis van de opgegeven zoekterm
   const searchFirestore = async () => {
     setSearchResults([]);
 
@@ -45,6 +36,7 @@ function Vrienden() {
     }
   };
 
+  // Stuur een vriendschapsverzoek naar de opgegeven ontvanger
   const sendFriendRequest = async (recipientId) => {
     const senderId = user;
     const status = "pending";
@@ -60,6 +52,7 @@ function Vrienden() {
     }
   };
 
+  // Haal vriendschapsverzoeken op waarbij de huidige gebruiker de ontvanger is
   const fetchFriendRequests = async () => {
     const q = query(
       collection(db, "friendRequests"),
@@ -79,6 +72,7 @@ function Vrienden() {
     }
   };
 
+  // Accepteer een vriendschapsverzoek
   const acceptFriendRequest = async (request) => {
     const requestDocRef = doc(db, "friendRequests", request.id);
 
@@ -98,6 +92,7 @@ function Vrienden() {
     }
   };
 
+  // Weiger een vriendschapsverzoek
   const denyFriendRequest = async (request) => {
     const requestDocRef = doc(db, "friendRequests", request.id);
 
@@ -112,6 +107,7 @@ function Vrienden() {
     }
   };
 
+  // Haal de vrienden op van de huidige gebruiker
   const fetchFriends = async () => {
     const q = query(
       collection(db, "friendRequests"),
@@ -163,16 +159,16 @@ function Vrienden() {
       <div className="row">
         <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
           <div className="sidebar-vrienden">
-            <Link to="/">TERUG</Link>
+          <Link className="Link-Terug" to="/"><button class="button-terug">Terug</button></Link>
             <input
               className="mt-4"
               type="text"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
-              placeholder="Search..."
+              placeholder="Zoeken..."
             />
             <button onClick={searchFirestore} className="mt-3">
-              Search
+              Zoeken
             </button>
           </div>
         </div>
@@ -180,10 +176,10 @@ function Vrienden() {
           <div className="meetings">
             {searchResults.map((result) => (
               <div key={result.id}>
-                <p>Name: {result.displayName}</p>
+                <p>Naam: {result.displayName}</p>
                 <p>Email: {result.email}</p>
                 <button onClick={() => sendFriendRequest(result.id)}>
-                  Send Friend Request
+                  Vriendschapsverzoek sturen
                 </button>
                 <hr />
               </div>
@@ -194,18 +190,17 @@ function Vrienden() {
             <div key={request.id}>
               <p>Id: {request.senderId}</p>
               <button onClick={() => acceptFriendRequest(request)}>
-                Accept
+                Accepteren
               </button>
-              <button onClick={() => denyFriendRequest(request)}>Deny</button>
+              <button onClick={() => denyFriendRequest(request)}>Weigeren</button>
               <hr />
             </div>
           ))}
 
-          <h2>Friends</h2>
           {friends.map((friend) => (
             <div key={friend.id}>
               <p>Id: {friend.senderId}</p>
-              <p>Name: {friend.displayName}</p>
+              <p>Naam: {friend.displayName}</p>
               <p>Email: {friend.email}</p>
               <hr />
             </div>

@@ -77,7 +77,7 @@ const Settings = () => {
         <div className="row">
           <div className="col-lg-3">
             <div className="sidebar">
-              <Link to="/">TERUG</Link>
+            <Link className="Link-Terug" to="/"><button className="button-terug">Terug</button></Link>
             </div>
           </div>
         </div>
