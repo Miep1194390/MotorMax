@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { auth, provider } from "../firebase";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 
 
@@ -28,7 +28,7 @@ const Login = () => {
 
   const handleClick = () => {
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async (result) => {
         const user = result.user;
         console.log("Gebruikersinformatie:", user);
         localStorage.setItem("username", user.displayName);
@@ -39,12 +39,25 @@ const Login = () => {
         const usersCollection = collection(db, "users");
         const userDoc = doc(usersCollection, user.uid);
 
+        const docSnap = await getDoc(userDoc);
+
         const userData = {
           displayName: user.displayName,
           email: user.email,
           uid: user.uid,
           profilePicture: user.photoURL,
+          Voertuig: "",
         };
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          if (data.isPrivate !== undefined) {
+            userData.isPrivate = data.isPrivate;
+          }
+          if (data.Voertuig !== undefined) {
+            userData.Voertuig = data.Voertuig;
+          }
+        }
 
         setDoc(userDoc, userData)
           .then(() => {
@@ -59,6 +72,7 @@ const Login = () => {
         console.error("Fout bij aanmelden:", error);
       });
   };
+
 
   return (
     <div className="container-fluid login-bg">
