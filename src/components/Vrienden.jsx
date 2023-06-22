@@ -41,7 +41,7 @@ function Vrienden() {
         ]);
       });
     } catch (error) {
-      console.log("Error getting documents: ", error);
+      console.log(error);
     }
   };
 
@@ -55,9 +55,8 @@ function Vrienden() {
         senderId,
         status,
       });
-      console.log("Friend request sent successfully");
     } catch (error) {
-      console.log("Error sending friend request: ", error);
+      console.log(error);
     }
   };
 

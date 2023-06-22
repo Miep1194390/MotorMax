@@ -61,16 +61,9 @@ const Login = () => {
 
         setDoc(userDoc, userData)
           .then(() => {
-            console.log("User document succesvol aangemaakt in Firestore");
             navigateTo("/feed", { state: { userData } });
           })
-          .catch((error) => {
-            console.error("Error bij het maken van een user document:", error);
-          });
       })
-      .catch((error) => {
-        console.error("Fout bij aanmelden:", error);
-      });
   };
 
 
