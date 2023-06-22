@@ -8,6 +8,7 @@ const Settings = () => {
   const [displayName, setDisplayName] = useState("");
   const [isPrivate, setIsPrivate] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [Voertuig, setVoertuig] = useState("");
 
   useEffect(() => {
     const user = auth.currentUser;
@@ -19,6 +20,7 @@ const Settings = () => {
         if (docSnap.exists()) {
           const data = docSnap.data();
           setIsPrivate(data.isPrivate);
+          setVoertuig(data.Voertuig || "");
         }
       };
       fetchData();
@@ -40,6 +42,9 @@ const Settings = () => {
           if (isPrivate) {
             updatedData.isPrivate = isPrivate;
           }
+          if (Voertuig) {
+            updatedData.Voertuig = Voertuig;
+          }
 
           await updateDoc(userRef, updatedData);
           console.log("Privacy instellingen aangepast.");
@@ -48,6 +53,7 @@ const Settings = () => {
           const newUser = {
             displayName,
             isPrivate,
+            Voertuig,
           };
           await setDoc(userRef, newUser);
           console.log("Maakt nieuwe gebruiker aan in db.");
@@ -101,6 +107,18 @@ const Settings = () => {
               checked={isPrivate}
               onChange={(e) => setIsPrivate(e.target.checked)}
               className="settings-page__checkbox"
+            />
+          </div>
+          <div className="settings-page__form-group">
+            <label htmlFor="Voertuig" className="settings-page__label">
+              Voertuig:
+            </label>
+            <input
+              type="text"
+              id="Voertuig"
+              value={Voertuig}
+              onChange={(e) => setVoertuig(e.target.value)}
+              className="settings-page__input"
             />
           </div>
           <button onClick={saveSettings} className="settings-page__button">
