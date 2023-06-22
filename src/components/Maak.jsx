@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { collection, onSnapshot, addDoc, deleteDoc, doc, setDoc, getDoc,} from "firebase/firestore";
+import { collection, onSnapshot, addDoc, deleteDoc, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "../css/App.scss";
@@ -17,6 +17,7 @@ const Maak = () => {
   const [newTime, setNewTime] = useState("");
   const [currentUser, setCurrentUser] = useState(null);
   const [imageFile, setImageFile] = useState(null);
+  const [editingMeetingId, setEditingMeetingId] = useState(null); // Toegevoegde state voor de ID van de te bewerken vergadering
 
   useEffect(() => {
     const unsubscribe = onSnapshot(meetingsCollectionRef, (snapshot) => {
@@ -44,11 +45,6 @@ const Maak = () => {
     }
   };
 
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    setImageFile(file);
-  };
-
   const createMeeting = async () => {
     if (!currentUser || !currentUser.uid) {
       console.log("Current user or UID is undefined");
@@ -73,7 +69,13 @@ const Maak = () => {
       meetingData.backgroundImage = downloadURL;
     }
 
-    await addDoc(meetingsCollectionRef, meetingData);
+    if (editingMeetingId) {
+      const meetingDoc = doc(db, "meetings", editingMeetingId);
+      await updateDoc(meetingDoc, meetingData);
+      setEditingMeetingId(null); 
+    } else {
+      await addDoc(meetingsCollectionRef, meetingData);
+    }
 
     setNewTitle("");
     setNewDescription("");
@@ -89,45 +91,35 @@ const Maak = () => {
     await deleteDoc(meetingDoc);
   };
 
+  const editMeeting = async (id) => {
+    const meetingToEdit = meetings.find((meeting) => meeting.id === id);
+    if (meetingToEdit) {
+      setNewTitle(meetingToEdit.title);
+      setNewDescription(meetingToEdit.description);
+      setNewLocation(meetingToEdit.location);
+      setNewStartDate(meetingToEdit.start_date);
+      setNewEndDate(meetingToEdit.end_date);
+      setNewTime(meetingToEdit.time);
+      setEditingMeetingId(id);
+    }
+  };
+
+  const currentDate = new Date().toISOString().split("T")[0];
+
   return (
     <div className="container-fluid maak-container">
       <div className="row">
         <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
           <div className="sidebar-maak">
             <Link to="/">TERUG</Link>
-            <input
-              placeholder="Titel"
-              value={newTitle}
-              onChange={(event) => setNewTitle(event.target.value)}
-            ></input>
-            <input
-              placeholder="Beschrijving"
-              value={newDescription}
-              onChange={(event) => setNewDescription(event.target.value)}
-            ></input>
-            <input
-              placeholder="Locatie"
-              value={newLocation}
-              onChange={(event) => setNewLocation(event.target.value)}
-            ></input>
-            <input
-              placeholder="Start datum"
-              value={newStartDate}
-              onChange={(event) => setNewStartDate(event.target.value)}
-            ></input>
-            <input
-              placeholder="Eind datum"
-              value={newEndDate}
-              onChange={(event) => setNewEndDate(event.target.value)}
-            ></input>
-            <input
-              placeholder="Tijdstip"
-              value={newTime}
-              onChange={(event) => setNewTime(event.target.value)}
-            ></input>
-            <input type="file" onChange={handleFileUpload} />
+            <input type="text" placeholder="Titel" value={newTitle} onChange={(event) => setNewTitle(event.target.value)}/>
+            <input type="text" placeholder="Beschrijving" value={newDescription} onChange={(event) => setNewDescription(event.target.value)}/>
+            <input type="text" placeholder="Locatie" value={newLocation} onChange={(event) => setNewLocation(event.target.value)}/>
+            <input type="date" placeholder="Start datum" value={newStartDate} onChange={(event) => setNewStartDate(event.target.value)} min={currentDate}/>
+            <input type="date" placeholder="Eind datum" value={newEndDate} onChange={(event) => setNewEndDate(event.target.value)} min={currentDate} />
+            <input type="time" placeholder="Tijdstip" value={newTime} onChange={(event) => setNewTime(event.target.value)} />
             <button className="sidebar-maak-button" onClick={createMeeting}>
-              Meeting aanmaken
+              {editingMeetingId ? "Vergadering bijwerken" : "Meeting aanmaken"}
             </button>
           </div>
         </div>
@@ -151,12 +143,8 @@ const Maak = () => {
                         <p>Tijdstip: {meeting.time}</p>
                       </div>
                       <div className="post-actions">
-                        <button
-                          className="verwijder-post-button"
-                          onClick={() => deleteMeeting(meeting.id)}
-                        >
-                          Verwijder meeting
-                        </button>
+                        <button className="verwijder-post-button" onClick={() => deleteMeeting(meeting.id)}>Verwijder meeting</button>
+                        <button className="bewerk-post-button" onClick={() => editMeeting(meeting.id)}>Bewerk meeting</button>
                       </div>
                     </div>
                   </div>
