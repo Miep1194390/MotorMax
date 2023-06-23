@@ -99,39 +99,48 @@ const Feed = () => {
         <div className="row d-flex justify-content-center">
           <div className="row d-flex justify-content-center">
               <div className="feed-container">
-                {filteredMeetings.map((meeting) => (
-                  <div
-                    key={meeting.id}
-                    className="feed-item-container mx-3 my-3 col-6"
-                  >
-                    <div className="meeting-info">
-                      <div className="d-flex">
-                        <img className="profielpic" src="" alt="" />
-                        <p className="mt-2 ms-3">Gebruiker</p>
-                      </div>
-                      {meeting.backgroundImage && (
-                        <img
-                          className="meeting-img"
-                          src={meeting.backgroundImage}
-                          alt=""
-                        />
-                      )}
-                      <div className="p-1">
-                        <h4>{meeting.title}</h4>
-                        <p>{meeting.description}</p>
-                        <p className="p-0 m-0">Locatie: {meeting.location}</p>
-                        <p className="p-0 m-0">
-                          Start datum: {meeting.start_date}
-                        </p>
-                        <p className="p-0 m-0">
-                          Eind datum: {meeting.end_date}
-                        </p>
-                        <p className="p-0 m-0">Tijdstip: {meeting.time}</p>
-                        <hr />
+                {filteredMeetings.map((meeting) => {
+                  const meetingCreator = getUserById(meeting.userId);
+                  return (
+                    <div
+                      key={meeting.id}
+                      className="feed-item-container mx-3 my-3 col-6"
+                    >
+                      <div className="meeting-info">
+                        <div className="d-flex">
+                          <img
+                            className="profielpic"
+                            src={meetingCreator.profilePicture}
+                            alt=""
+                          />
+                          <p className="mt-2 ms-3">{meetingCreator.name}</p>
+                        </div>
+                        {meeting.backgroundImage && (
+                          <img
+                            className="meeting-img"
+                            src={meeting.backgroundImage}
+                            alt=""
+                          />
+                        )}
+                        <div className="p-1">
+                          <h4>{meeting.title}</h4>
+                          <p>{meeting.description}</p>
+                          <p className="p-0 m-0">
+                            Locatie: {meeting.location}
+                          </p>
+                          <p className="p-0 m-0">
+                            Start datum: {meeting.start_date}
+                          </p>
+                          <p className="p-0 m-0">
+                            Eind datum: {meeting.end_date}
+                          </p>
+                          <p className="p-0 m-0">Tijdstip: {meeting.time}</p>
+                          <hr />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
           </div>
         </div>
