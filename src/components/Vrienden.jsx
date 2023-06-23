@@ -68,7 +68,7 @@ const Vrienden = () => {
       }));
       setFriendRequests(requests);
     } catch (error) {
-      console.log("Error fetching friend requests:", error);
+      console.log(error);
     }
   };
 
@@ -78,7 +78,7 @@ const Vrienden = () => {
 
     try {
       await updateDoc(requestDocRef, { status: "accepted" });
-      console.log("Friend request accepted successfully");
+      console.log("Vriendschapsverzoek succesvol geaccepteerd");
       setFriendRequests((prevRequests) =>
         prevRequests.filter((r) => r.id !== request.id)
       );
@@ -88,7 +88,7 @@ const Vrienden = () => {
         { id: request.senderId, ...request },
       ]);
     } catch (error) {
-      console.log("Error accepting friend request:", error);
+      console.log(error);
     }
   };
 
@@ -98,12 +98,12 @@ const Vrienden = () => {
 
     try {
       await updateDoc(requestDocRef, { status: "denied" });
-      console.log("Friend request denied successfully");
+      console.log("Vriendschapsverzoek succesvol geweigerd");
       setFriendRequests((prevRequests) =>
         prevRequests.filter((r) => r.id !== request.id)
       );
     } catch (error) {
-      console.log("Error denying friend request:", error);
+      console.log(error);
     }
   };
 
@@ -145,7 +145,7 @@ const Vrienden = () => {
 
       setFriends(updatedRequests);
     } catch (error) {
-      console.log("Error fetching friends:", error);
+      console.log(error);
     }
   };
 
