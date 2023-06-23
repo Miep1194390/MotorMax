@@ -97,26 +97,43 @@ const Feed = () => {
         </div>
 
         <div className="row d-flex justify-content-center">
-          {filteredMeetings.map((meeting) => (
-            <div key={meeting.id} className="feed-item-container mx-3 my-3 col-6">
-              <div className="meeting-info">
-                <div className="d-flex">
-                    <img className="profielpic" src="https://images.pexels.com/photos/1448385/pexels-photo-1448385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
-                    <p className="mt-2 ms-3">Gebruiker</p>
-                </div>
-                <img className="meeting-img" src="https://images.pexels.com/photos/1448385/pexels-photo-1448385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt=""/>
-                <div className="p-1">
-                  <h4>{meeting.title}</h4>
-                  <p>{meeting.description}</p>
-                  <p className="p-0 m-0">Locatie: {meeting.location}</p>
-                  <p className="p-0 m-0">Start datum: {meeting.start_date}</p>
-                  <p className="p-0 m-0">Eind datum: {meeting.end_date}</p>
-                  <p className="p-0 m-0">Tijdstip: {meeting.time}</p>
-                  <hr />
-                </div>
+          <div className="row d-flex justify-content-center">
+              <div className="feed-container">
+                {filteredMeetings.map((meeting) => (
+                  <div
+                    key={meeting.id}
+                    className="feed-item-container mx-3 my-3 col-6"
+                  >
+                    <div className="meeting-info">
+                      <div className="d-flex">
+                        <img className="profielpic" src="" alt="" />
+                        <p className="mt-2 ms-3">Gebruiker</p>
+                      </div>
+                      {meeting.backgroundImage && (
+                        <img
+                          className="meeting-img"
+                          src={meeting.backgroundImage}
+                          alt=""
+                        />
+                      )}
+                      <div className="p-1">
+                        <h4>{meeting.title}</h4>
+                        <p>{meeting.description}</p>
+                        <p className="p-0 m-0">Locatie: {meeting.location}</p>
+                        <p className="p-0 m-0">
+                          Start datum: {meeting.start_date}
+                        </p>
+                        <p className="p-0 m-0">
+                          Eind datum: {meeting.end_date}
+                        </p>
+                        <p className="p-0 m-0">Tijdstip: {meeting.time}</p>
+                        <hr />
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>

@@ -179,6 +179,7 @@ const Maak = () => {
                 onChange={(event) => setImageFile(event.target.files[0])}
               />
             </div>
+
             <button className="sidebar-maak-button" onClick={createMeeting}>
               {editingMeetingId ? "Vergadering bijwerken" : "Meeting aanmaken"}
             </button>
@@ -191,27 +192,44 @@ const Maak = () => {
               .filter((meeting) => meeting.uid === currentUser?.uid)
               .map((meeting) => {
                 return (
-                  <div key={meeting.id} className="maak-container_item mx-3 my-3 col-xxl-5">
+                  <div
+                    key={meeting.id}
+                    className="maak-container_item mx-3 my-3 col-xxl-5"
+                  >
                     <div className="post-content bg-white p-3 rounded">
                       <div className="post-body">
                         <h2 className="text-dark">Titel: {meeting.title}</h2>
-                        <p className="text-muted">Beschrijving: {meeting.description}</p>
-                        <p className="text-muted">Locatie: {meeting.location}</p>
-                        <p className="text-muted">Start datum: {meeting.start_date}</p>
-                        <p className="text-muted">Eind datum: {meeting.end_date}</p>
+                        <p className="text-muted">
+                          Beschrijving: {meeting.description}
+                        </p>
+                        <p className="text-muted">
+                          Locatie: {meeting.location}
+                        </p>
+                        <p className="text-muted">
+                          Start datum: {meeting.start_date}
+                        </p>
+                        <p className="text-muted">
+                          Eind datum: {meeting.end_date}
+                        </p>
                         <p className="text-muted">Tijdstip: {meeting.time}</p>
                       </div>
                       <div className="post-actions mt-3">
-                      <button className="bewerk-post-button btn btn-success" onClick={() => editMeeting(meeting.id)}>
+                        <button
+                          className="bewerk-post-button btn btn-success"
+                          onClick={() => editMeeting(meeting.id)}
+                        >
                           Bewerk meeting
                         </button>
-                        <button className="verwijder-post-button btn btn-danger" onClick={() => deleteMeeting(meeting.id)}>
+                        <button
+                          className="verwijder-post-button btn btn-danger"
+                          onClick={() => deleteMeeting(meeting.id)}
+                        >
                           Verwijder meeting
                         </button>
                       </div>
                     </div>
                   </div>
-                );                
+                );
               })}
           </div>
         </div>
