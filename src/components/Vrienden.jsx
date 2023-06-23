@@ -155,30 +155,34 @@ const Vrienden = () => {
   }, []);
 
   return (
-    <div className="container-fluid maak-container">
+    <div className="container-fluid maak-container h-100">
       <div className="row">
         <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
+
           <div className="sidebar-vrienden">
-          <Link className="Link-Terug" to="/"><button class="button-terug">Terug</button></Link>
-            <input
-              className="mt-4"
-              type="text"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-              placeholder="Zoeken..."
-            />
-            <button onClick={searchFirestore} className="mt-3">
-              Zoeken
-            </button>
+            <Link className="Link-Terug" to="/"><button class="button-terug">Terug</button></Link>
+            <div className="d-flex flex-column justify-content-center h-100">
+              <input
+                className="mt-4 "
+                type="text"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder="Zoeken..."
+              />
+              <button onClick={searchFirestore} className="mt-3 button-vriend-zoeken">
+                Zoeken
+              </button>
+            </div>
           </div>
-        </div>
+
+        </div> 
         <div className="col-xxl-9 col-xl-9 col-lg-9 col-md-9">
           <div className="meetings">
             {searchResults.map((result) => (
               <div key={result.id}>
-                <p>Naam: {result.displayName}</p>
-                <p>Email: {result.email}</p>
-                <button onClick={() => sendFriendRequest(result.id)}>
+                <p className="p-0 m-0">Naam: {result.displayName}</p>
+                <p className="pb-1">Email: {result.email}</p>
+                <button className="btn btn-outline-success" onClick={() => sendFriendRequest(result.id)}>
                   Vriendschapsverzoek sturen
                 </button>
                 <hr />

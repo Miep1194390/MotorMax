@@ -180,7 +180,7 @@ const Maak = () => {
               />
             </div>
             <button className="sidebar-maak-button" onClick={createMeeting}>
-              {editingMeetingId ? "Vergadering bijwerken" : "Meeting aanmaken"}
+              {editingMeetingId ? "Meeting bijwerken" : "Meeting aanmaken"}
             </button>
           </div>
         </div>

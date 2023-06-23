@@ -66,7 +66,6 @@ const Login = () => {
       })
   };
 
-
   return (
     <div className="container-fluid login-bg">
       <div className="row justify-content-center align-items-center vh-100">

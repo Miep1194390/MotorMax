@@ -112,31 +112,20 @@ input[type="file"] {
 
 .button-terug {
   align-items: center;
-  background-clip: padding-box;
+  height: 2rem;
+  width: 4rem;
   background-color: #fa6400;
-  border: 1px solid transparent;
+  border: none;
   border-radius: .25rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
-  box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  display: inline-flex;
-  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 300;
   justify-content: center;
-  line-height: 1.25;
-  margin: 0;
-  min-height: 3rem;
-  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
   position: relative;
   text-decoration: none;
   transition: all 250ms;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: baseline;
-  width: auto;
 }
 
 .button-terug:hover,
@@ -426,6 +415,44 @@ input[type="file"] {
     border-right: none;
     transition: .25s;
   }
+  .button-vriend-zoeken {
+    align-items: center;
+    height: 2rem;
+    width: 100%;
+    background-color: #fa6400;
+    border: none;
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 300;
+    justify-content: center;
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+  }
+  .button-vriend-zoeken:hover,
+  .button-vriend-zoeken:focus {
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  }
+
+  .button-vriend-zoeken:hover {
+    transform: translateY(-1px);
+  }
+
+  .button-vriend-zoeken:active {
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
+  }
+}
+
+.meetings {
+  button {
+    transition: .25s;
+  }
 }
 
 .sidebar-maak {
@@ -559,6 +586,7 @@ input[type="file"] {
 
 .login-button:hover,
 .login-button:focus {
+ 
   background-color: #fb8332;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }

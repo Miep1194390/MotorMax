@@ -95,16 +95,16 @@ const Feed = () => {
             />
           </div>
         </div>
-
+        
         <div className="row d-flex justify-content-center">
           {filteredMeetings.map((meeting) => (
             <div key={meeting.id} className="feed-item-container mx-3 my-3 col-6">
               <div className="meeting-info">
                 <div className="d-flex">
-                    <img className="profielpic" src="https://images.pexels.com/photos/1448385/pexels-photo-1448385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" />
+                    <img className="profielpic" src="" alt="" />
                     <p className="mt-2 ms-3">Gebruiker</p>
                 </div>
-                <img className="meeting-img" src="https://images.pexels.com/photos/1448385/pexels-photo-1448385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt=""/>
+                <img className="meeting-img" src="" alt=""/>
                 <div className="p-1">
                   <h4>{meeting.title}</h4>
                   <p>{meeting.description}</p>
@@ -118,6 +118,7 @@ const Feed = () => {
             </div>
           ))}
         </div>
+
       </div>
     </div>
   );
